@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable consistent-return */
 /* eslint-disable no-alert */
 import { Avatar, IconButton, Button } from '@material-ui/core';
@@ -6,19 +7,29 @@ import ChatIcon from '@material-ui/icons/Chat';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import SearchIcon from '@material-ui/icons/Search';
 import * as EmailValidator from 'email-validator';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { auth, db } from '../firebase';
 
 function Sidebar() {
+  const [user] = useAuthState(auth);
+
   const createChat = () => {
     const input = prompt('Please enter an email address for the user you wish to chat with');
+
     if (!input) return null;
+
     if (EmailValidator.validate(input)) {
-      // chat
+      db.collection('chats').add({
+        users: [user.email, input],
+      });
     }
   };
   return (
     <Container>
       <Header>
-        <UserAvatar />
+        <UserAvatar
+          onClick={() => auth.signOut()}
+        />
         <IconsContainer>
 
           <IconButton>
