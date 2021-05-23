@@ -9,9 +9,11 @@ function Login() {
   };
   return (
     <Container>
+
       <Head>
         <title>Login</title>
       </Head>
+
       <LoginContainer>
         <Logo src="logo.svg" />
         <Button
@@ -21,6 +23,7 @@ function Login() {
           Sign in with Google
         </Button>
       </LoginContainer>
+
     </Container>
 
   );
