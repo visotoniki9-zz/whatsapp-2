@@ -1,10 +1,20 @@
+/* eslint-disable consistent-return */
+/* eslint-disable no-alert */
 import { Avatar, IconButton, Button } from '@material-ui/core';
 import styled from 'styled-components';
 import ChatIcon from '@material-ui/icons/Chat';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import SearchIcon from '@material-ui/icons/Search';
+import * as EmailValidator from 'email-validator';
 
 function Sidebar() {
+  const createChat = () => {
+    const input = prompt('Please enter an email address for the user you wish to chat with');
+    if (!input) return null;
+    if (EmailValidator.validate(input)) {
+      // chat
+    }
+  };
   return (
     <Container>
       <Header>
@@ -26,9 +36,8 @@ function Sidebar() {
         <SearchInput placeholder="Search" />
       </Search>
 
-      <SidebarButton>Start a new Chat</SidebarButton>
+      <SidebarButton onClick={createChat()}>Start a new Chat</SidebarButton>
 
-      
     </Container>
   );
 }
