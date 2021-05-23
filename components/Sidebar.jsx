@@ -40,8 +40,8 @@ function Sidebar() {
     <Container>
       <Header>
         <UserAvatar
+          src={user.photoURL}
           onClick={() => auth.signOut()}
-          s
         />
         <IconsContainer>
 
@@ -63,7 +63,7 @@ function Sidebar() {
       <SidebarButton onClick={createChat}>Start a new Chat</SidebarButton>
 
       {chatsSnapshot?.docs.map((chat) => (
-        <Chat key={chat.id} id={chat.id} user={chat.data().users} />
+        <Chat key={chat.id} id={chat.id} users={chat.data().users} />
       ))}
 
     </Container>
