@@ -36,7 +36,7 @@ function Sidebar() {
         <SearchInput placeholder="Search" />
       </Search>
 
-      <SidebarButton onClick={createChat()}>Start a new Chat</SidebarButton>
+      <SidebarButton onClick={createChat}>Start a new Chat</SidebarButton>
 
     </Container>
   );
