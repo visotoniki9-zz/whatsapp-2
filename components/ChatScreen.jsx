@@ -76,6 +76,8 @@ const Header = styled.div`
         top: 0;
         display: flex;
         padding: 11px;
+        height: 80px;
+        align-items: center;
         border-bottom: 1px solid whitesmoke;
     `;
 
