@@ -2,7 +2,6 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable import/no-extraneous-dependencies */
 import '../styles/globals.css';
-import 'reseter.css';
 import { useEffect, useReducer } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import firebase from 'firebase';
