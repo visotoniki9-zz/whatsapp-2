@@ -1,5 +1,6 @@
 import firebase from 'firebase';
 
+// Firebase Config
 const firebaseConfig = {
   apiKey: 'AIzaSyC1i0ak6k0d9aFQr3dDyVRl5wdQ9hvWiZU',
   authDomain: 'whatsapp-2-b4e01.firebaseapp.com',
@@ -9,11 +10,10 @@ const firebaseConfig = {
   appId: '1:727320716717:web:acf3ca914d9546eb58ed24',
 };
 
+// Check if there is a firebase intance if not create one.
 const app = !firebase.apps.length
   ? firebase.initializeApp(firebaseConfig)
   : firebase.app();
-
-// const app = firebase.initializeApp(firebaseConfig);
 
 const db = app.firestore();
 const auth = app.auth();
