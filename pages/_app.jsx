@@ -13,6 +13,7 @@ import Loading from '../components/Loading';
 function MyApp({ Component, pageProps }) {
   const [user, loading] = useAuthState(auth);
 
+  // Creates or updates user in db
   useEffect(() => {
     if (user) {
       db.collection('users').doc(user.uid).set({

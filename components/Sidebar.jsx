@@ -13,11 +13,15 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { useCollection } from 'react-firebase-hooks/firestore';
 import { auth, db } from '../firebase';
 import Chat from './Chat';
+import chatAlreadyExists from '../utils/chatAlreadyExists';
 
 function Sidebar() {
+  // Holds current user data
   const [user] = useAuthState(auth);
+  // Returns reference to current user chats
   const userChatRef = db.collection('chats')
     .where('users', 'array-contains', user.email);
+  // Holds snapshot of user chats
   const [chatsSnapshot] = useCollection(userChatRef);
 
   const createChat = () => {
@@ -25,16 +29,17 @@ function Sidebar() {
 
     if (!input) return null;
 
-    if (EmailValidator.validate(input) && !chatAlreadyExists(input) && input !== user.email) {
+    // Checks if the email is valid,
+    // the chat already exists,
+    // or the email is the same as the current user.
+    if (EmailValidator.validate(input)
+    && !chatAlreadyExists(input, chatsSnapshot)
+    && input !== user.email) {
       db.collection('chats').add({
         users: [user.email, input],
       });
     }
   };
-
-  const chatAlreadyExists = (recipientEmail) => !!chatsSnapshot?.docs.find(
-    (chat) => chat.data().users.find((usr) => usr === recipientEmail)?.length > 0,
-  );
 
   return (
     <Container>
