@@ -9,7 +9,7 @@ import AttachFileIcon from '@material-ui/icons/AttachFile';
 import { useCollection } from 'react-firebase-hooks/firestore';
 import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon';
 import MicIcon from '@material-ui/icons/Mic';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import SendIcon from '@material-ui/icons/Send';
 import firebase from 'firebase';
 import TimeAgo from 'timeago-react';
@@ -21,6 +21,7 @@ function ChatScreen({ chat, messages }) {
   console.log(chat, messages);
   const [user] = useAuthState(auth);
   const [input, setInput] = useState('');
+  const endOfMessagesRef = useRef(null);
   const router = useRouter(auth);
   const [messagesSnapshot] = useCollection(
     db
@@ -52,6 +53,13 @@ function ChatScreen({ chat, messages }) {
     ));
   };
 
+  const scrollToBottom = () => {
+    endOfMessagesRef.current.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start',
+    });
+  };
+
   const sendMessage = (e) => {
     e.preventDefault();
     // Update last seen
@@ -68,6 +76,7 @@ function ChatScreen({ chat, messages }) {
     });
 
     setInput('');
+    scrollToBottom();
   };
 
   const recipientEmail = getRecipientEmail(chat.users, user);
@@ -113,7 +122,7 @@ function ChatScreen({ chat, messages }) {
 
       <MessageContainer>
         {showMessages()}
-        <EndOfMessage />
+        <EndOfMessage ref={endOfMessagesRef} />
       </MessageContainer>
 
       <InputContainer>
