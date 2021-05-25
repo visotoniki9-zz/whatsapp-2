@@ -15,7 +15,7 @@ function Login() {
       </Head>
 
       <LoginContainer>
-        <Logo src="logo.svg" />
+        <Logo src="/logo.svg" />
         <Button
           onClick={signIn}
           variant="outlined"
